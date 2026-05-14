@@ -68,7 +68,7 @@ for match in football_data.get("matches", []):
 
     if "Germany" in teams:
         germany_match = True
-de_holidays = holidays.DE(prov='BY')
+de_holidays = holidays.DE(subdiv='BY')
 
 holiday = now.date() in de_holidays
 weekend = now.weekday() >= 5
