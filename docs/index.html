@@ -150,15 +150,19 @@ new Chart(ctx, {
     labels: labels,
 
     datasets: [
-      {
-        label: 'Bad',
-        data: badData
-      },
-      {
-        label: 'Sauna',
-        data: saunaData
-      }
-    ]
+  {
+    label: 'Bad',
+    data: badData,
+    borderColor: '#3b82f6',
+    tension: 0.3
+  },
+  {
+    label: 'Sauna',
+    data: saunaData,
+    borderColor: '#ef4444',
+    tension: 0.3
+  }
+]
   }
 });
 }
