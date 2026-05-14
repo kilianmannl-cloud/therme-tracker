@@ -60,8 +60,14 @@
   <h2>Temperatur</h2>
   <div class="value" id="temp">--</div>
 </div>
-
 <div class="card">
+  <h2>Status</h2>
+
+  <div id="status"
+       style="font-size:32px;font-weight:bold;">
+    --
+  </div>
+</div>
   <h2>Letztes Update</h2>
   <div class="small" id="time">--</div>
 </div>
@@ -88,6 +94,20 @@ async function loadData() {
 
   document.getElementById('time').innerText =
     latest[0];
+  const sauna = parseInt(latest[2]);
+
+let status = '🟢 Ruhig';
+
+if (sauna > 70) {
+  status = '🟡 Mittel';
+}
+
+if (sauna > 90) {
+  status = '🔴 Sehr voll';
+}
+
+document.getElementById('status').innerText =
+  status;
   const labels = [];
 const badData = [];
 const saunaData = [];
