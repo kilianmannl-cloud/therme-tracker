@@ -38,8 +38,14 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
+  <div class="card">
+  <h2>Statistik</h2>
+
+  <div id="stats"></div>
+</div>
 <div class="card">
   <h2>Verlauf</h2>
+  
   <canvas id="chart"></canvas>
 </div>
   <body>
@@ -141,6 +147,25 @@ rows.slice(1).forEach(row => {
   saunaData.push(cols[2]);
 });
 
+  const saunaNumbers = saunaData.map(Number);
+
+const avgSauna =
+  Math.round(
+    saunaNumbers.reduce((a,b)=>a+b,0)
+    / saunaNumbers.length
+  );
+
+const maxSauna =
+  Math.max(...saunaNumbers);
+
+const minSauna =
+  Math.min(...saunaNumbers);
+
+document.getElementById('stats').innerHTML = `
+  Durchschnitt Sauna: <b>${avgSauna}%</b><br><br>
+  Höchste Auslastung: <b>${maxSauna}%</b><br><br>
+  Niedrigste Auslastung: <b>${minSauna}%</b>
+`;
 const ctx = document.getElementById('chart');
 
 new Chart(ctx, {
