@@ -91,6 +91,24 @@ async function loadData() {
 
   document.getElementById('temp').innerText =
     latest[3] + '°C';
+  const weatherCode = parseInt(latest[4]);
+
+let weatherEmoji = '☁️';
+
+if (weatherCode === 0) {
+  weatherEmoji = '☀️';
+}
+
+if (weatherCode >= 1 && weatherCode <= 3) {
+  weatherEmoji = '⛅';
+}
+
+if (weatherCode >= 51) {
+  weatherEmoji = '🌧️';
+}
+
+document.getElementById('temp').innerText =
+  weatherEmoji + ' ' + latest[3] + '°C';
 
   document.getElementById('time').innerText =
     latest[0];
