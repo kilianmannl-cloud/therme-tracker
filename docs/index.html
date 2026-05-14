@@ -77,6 +77,14 @@
   <div class="value" id="temp">--</div>
 </div>
 <div class="card">
+  <h2>Kalender</h2>
+
+  <div id="calendar"
+       style="font-size:28px;font-weight:bold;">
+    --
+  </div>
+</div>
+    <div class="card">
   <h2>Fußball</h2>
 
   <div id="football"
@@ -136,7 +144,22 @@ document.getElementById('temp').innerText =
 
   document.getElementById('time').innerText =
     latest[0];
- const bayernMatch = latest[7] === 'True';
+ const holiday = latest[5] === 'True';
+const weekend = latest[6] === 'True';
+
+let calendarText = '💼 Werktag';
+
+if (weekend) {
+  calendarText = '🏖️ Wochenende';
+}
+
+if (holiday) {
+  calendarText = '🎉 Feiertag';
+}
+
+document.getElementById('calendar').innerText =
+  calendarText;
+  const bayernMatch = latest[7] === 'True';
 const germanyMatch = latest[8] === 'True';
 
 let footballText = '⚪ Kein Spiel';
