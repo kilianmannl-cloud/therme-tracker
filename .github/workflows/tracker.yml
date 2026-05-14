@@ -28,6 +28,8 @@ jobs:
         run: pip install requests holidays
 
       - name: Run scraper
+        env:
+          FOOTBALL_API_KEY: ${{ secrets.FOOTBALL_API_KEY }}
         run: python scripts/scrape_therme.py
 
       - name: Commit updated data
