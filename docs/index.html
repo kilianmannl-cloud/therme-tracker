@@ -39,6 +39,11 @@
 </head>
 
   <div class="card">
+  <h2>Beste Thermenzeit</h2>
+
+  <div id="bestTime"></div>
+</div>
+  <div class="card">
   <h2>Statistik</h2>
 
   <div id="stats"></div>
@@ -147,6 +152,28 @@ rows.slice(1).forEach(row => {
   saunaData.push(cols[2]);
 });
 
+let bestIndex = 0;
+
+rows.slice(1).forEach((row, index) => {
+
+  const cols = row.split(',');
+
+  if (
+    Number(cols[2]) <
+    Number(rows[bestIndex + 1].split(',')[2])
+  ) {
+    bestIndex = index;
+  }
+});
+
+const bestRow =
+  rows[bestIndex + 1].split(',');
+
+document.getElementById('bestTime').innerHTML = `
+  🟢 Niedrigste Sauna-Auslastung:<br><br>
+  <b>${bestRow[2]}%</b><br><br>
+  ${bestRow[0]}
+`;
   const saunaNumbers = saunaData.map(Number);
 
 const avgSauna =
