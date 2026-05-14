@@ -77,6 +77,14 @@
   <div class="value" id="temp">--</div>
 </div>
 <div class="card">
+  <h2>Fußball</h2>
+
+  <div id="football"
+       style="font-size:28px;font-weight:bold;">
+    --
+  </div>
+</div>
+    <div class="card">
   <h2>Status</h2>
 
   <div id="status"
@@ -128,6 +136,21 @@ document.getElementById('temp').innerText =
 
   document.getElementById('time').innerText =
     latest[0];
+ const bayernMatch = latest[7] === 'True';
+const germanyMatch = latest[8] === 'True';
+
+let footballText = '⚪ Kein Spiel';
+
+if (bayernMatch) {
+  footballText = '⚽ FC Bayern spielt';
+}
+
+if (germanyMatch) {
+  footballText = '🇩🇪 Deutschland spielt';
+}
+
+document.getElementById('football').innerText =
+  footballText;
   const sauna = parseInt(latest[2]);
 
 let status = '🟢 Ruhig';
