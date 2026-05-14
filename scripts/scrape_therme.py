@@ -5,7 +5,16 @@ from datetime import datetime
 
 now = datetime.now()
 
-# Wetterdaten von Open-Meteo
+# Therme Webseite laden
+url = "https://www.therme-bad-aibling.de"
+
+response = requests.get(url)
+
+# HTML speichern
+with open("data/page.html", "w", encoding="utf-8") as f:
+    f.write(response.text)
+
+# Wetterdaten
 weather_url = (
     "https://api.open-meteo.com/v1/forecast"
     "?latitude=47.86"
@@ -18,7 +27,7 @@ weather_data = requests.get(weather_url).json()
 temp = weather_data["current"]["temperature_2m"]
 weather_code = weather_data["current"]["weather_code"]
 
-# Noch Testwerte für Therme
+# Noch Testwerte
 bad = 80
 sauna = 95
 
@@ -41,4 +50,5 @@ with open("data/history.csv", "a", newline="") as f:
     writer = csv.writer(f)
     writer.writerow(row)
 
+print("HTML gespeichert")
 print("Daten gespeichert")
