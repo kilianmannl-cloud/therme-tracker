@@ -3,6 +3,7 @@ import re
 import requests
 
 from datetime import datetime
+import holidays
 
 now = datetime.now()
 
@@ -36,7 +37,10 @@ weather_data = requests.get(weather_url).json()
 temp = weather_data["current"]["temperature_2m"]
 weather_code = weather_data["current"]["weather_code"]
 
-holiday = False
+de_holidays = holidays.DE(prov='BY')
+
+holiday = now.date() in de_holidays
+weekend = now.weekday() >= 5
 bayern_match = False
 germany_match = False
 
