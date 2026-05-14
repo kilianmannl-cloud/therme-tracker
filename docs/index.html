@@ -39,6 +39,11 @@
 </head>
 
   <div class="card">
+  <h2>Durchschnitt nach Uhrzeit</h2>
+
+  <div id="timeStats"></div>
+</div>
+  <div class="card">
   <h2>Beste Thermenzeit</h2>
 
   <div id="bestTime"></div>
@@ -174,6 +179,39 @@ document.getElementById('bestTime').innerHTML = `
   <b>${bestRow[2]}%</b><br><br>
   ${bestRow[0]}
 `;
+  const hourMap = {};
+
+rows.slice(1).forEach(row => {
+
+  const cols = row.split(',');
+
+  const hour = cols[0].slice(11,13);
+
+  if (!hourMap[hour]) {
+    hourMap[hour] = [];
+  }
+
+  hourMap[hour].push(Number(cols[2]));
+});
+
+let html = '';
+
+Object.keys(hourMap).forEach(hour => {
+
+  const avg =
+    Math.round(
+      hourMap[hour]
+        .reduce((a,b)=>a+b,0)
+      / hourMap[hour].length
+    );
+
+  html += `
+    ${hour}:00 → <b>${avg}%</b><br><br>
+  `;
+});
+
+document.getElementById('timeStats').innerHTML =
+  html;
   const saunaNumbers = saunaData.map(Number);
 
 const avgSauna =
