@@ -1,6 +1,7 @@
 import csv
 import re
 import requests
+import os
 
 from datetime import datetime
 import holidays
@@ -37,6 +38,36 @@ weather_data = requests.get(weather_url).json()
 temp = weather_data["current"]["temperature_2m"]
 weather_code = weather_data["current"]["weather_code"]
 
+api_key = os.getenv("FOOTBALL_API_KEY")
+
+headers = {
+    "X-Auth-Token": api_key
+}
+
+football_url = (
+    "https://api.football-data.org/v4/matches"
+)
+
+football_data = requests.get(
+    football_url,
+    headers=headers
+).json()
+
+
+
+
+for match in football_data.get("matches", []):
+
+    home = match["homeTeam"]["name"]
+    away = match["awayTeam"]["name"]
+
+    teams = home + " " + away
+
+    if "Bayern" in teams:
+        bayern_match = True
+
+    if "Germany" in teams:
+        germany_match = True
 de_holidays = holidays.DE(prov='BY')
 
 holiday = now.date() in de_holidays
