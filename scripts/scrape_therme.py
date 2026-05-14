@@ -71,8 +71,7 @@ for match in football_data.get("matches", []):
 de_holidays = holidays.DE(subdiv='BY')
 
 holiday = now.date() in de_holidays
-print(now.date())
-print(de_holidays)
+
 weekend = now.weekday() >= 5
 bayern_match = False
 germany_match = False
@@ -91,7 +90,10 @@ row = [
 with open("data/history.csv", "a", newline="") as f:
     writer = csv.writer(f)
     writer.writerow(row)
-
+    
+with open("docs/history.csv", "a", newline="") as f:
+    writer = csv.writer(f)
+    writer.writerow(row)
 print("Bad:", bad)
 print("Sauna:", sauna)
 print("Temperatur:", temp)
