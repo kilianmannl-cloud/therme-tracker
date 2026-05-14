@@ -28,6 +28,11 @@
     h1 {
       margin-bottom: 30px;
     }
+
+    .small {
+      color: #9ca3af;
+      margin-top: 10px;
+    }
   </style>
 </head>
 
@@ -37,18 +42,50 @@
 
 <div class="card">
   <h2>Bad</h2>
-  <div class="value">79%</div>
+  <div class="value" id="bad">--</div>
 </div>
 
 <div class="card">
   <h2>Sauna</h2>
-  <div class="value">99%</div>
+  <div class="value" id="sauna">--</div>
 </div>
 
 <div class="card">
   <h2>Temperatur</h2>
-  <div class="value">12°C</div>
+  <div class="value" id="temp">--</div>
 </div>
+
+<div class="card">
+  <h2>Letztes Update</h2>
+  <div class="small" id="time">--</div>
+</div>
+
+<script>
+async function loadData() {
+
+  const response = await fetch('../data/history.csv');
+
+  const text = await response.text();
+
+  const rows = text.trim().split('\n');
+
+  const latest = rows[rows.length - 1].split(',');
+
+  document.getElementById('bad').innerText =
+    latest[1] + '%';
+
+  document.getElementById('sauna').innerText =
+    latest[2] + '%';
+
+  document.getElementById('temp').innerText =
+    latest[3] + '°C';
+
+  document.getElementById('time').innerText =
+    latest[0];
+}
+
+loadData();
+</script>
 
 </body>
 </html>
