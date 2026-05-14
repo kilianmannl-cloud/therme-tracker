@@ -29,3 +29,33 @@ weather_url = (
     "?latitude=47.86"
     "&longitude=12.01"
     "&current=temperature_2m,weather_code"
+)
+
+weather_data = requests.get(weather_url).json()
+
+temp = weather_data["current"]["temperature_2m"]
+weather_code = weather_data["current"]["weather_code"]
+
+holiday = False
+bayern_match = False
+germany_match = False
+
+row = [
+    now.isoformat(),
+    bad,
+    sauna,
+    temp,
+    weather_code,
+    holiday,
+    bayern_match,
+    germany_match
+]
+
+with open("data/history.csv", "a", newline="") as f:
+    writer = csv.writer(f)
+    writer.writerow(row)
+
+print("Bad:", bad)
+print("Sauna:", sauna)
+print("Temperatur:", temp)
+print("Daten gespeichert")
