@@ -34,9 +34,15 @@
       margin-top: 10px;
     }
   </style>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
-<body>
+<div class="card">
+  <h2>Verlauf</h2>
+  <canvas id="chart"></canvas>
+</div>
+  <body>
 
 <h1>Therme Bad Aibling Dashboard</h1>
 
@@ -82,6 +88,41 @@ async function loadData() {
 
   document.getElementById('time').innerText =
     latest[0];
+  const labels = [];
+const badData = [];
+const saunaData = [];
+
+rows.slice(1).forEach(row => {
+
+  const cols = row.split(',');
+
+  labels.push(cols[0].slice(11,16));
+
+  badData.push(cols[1]);
+
+  saunaData.push(cols[2]);
+});
+
+const ctx = document.getElementById('chart');
+
+new Chart(ctx, {
+  type: 'line',
+
+  data: {
+    labels: labels,
+
+    datasets: [
+      {
+        label: 'Bad',
+        data: badData
+      },
+      {
+        label: 'Sauna',
+        data: saunaData
+      }
+    ]
+  }
+});
 }
 
 loadData();
