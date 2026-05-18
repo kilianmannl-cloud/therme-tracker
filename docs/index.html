@@ -226,6 +226,22 @@ if (sauna >= 75) {
 
 document.getElementById('status').innerText =
   status;
+  const statusCard =
+  document.getElementById('status').parentElement;
+
+statusCard.style.transition = '0.3s';
+
+if (sauna >= 75) {
+  statusCard.style.background = '#7f1d1d';
+}
+
+else if (sauna >= 40) {
+  statusCard.style.background = '#78350f';
+}
+
+else {
+  statusCard.style.background = '#14532d';
+}
   const labels = [];
 const badData = [];
 const saunaData = [];
