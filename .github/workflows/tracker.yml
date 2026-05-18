@@ -40,4 +40,5 @@ jobs:
 
           git commit -m "Update tracking data" || echo "No changes"
 
+          git pull --rebase
           git push
