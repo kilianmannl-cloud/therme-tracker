@@ -93,6 +93,14 @@
   </div>
 </div>
    <div class="card">
+  <h2>Trend</h2>
+
+  <div id="trend"
+       style="font-size:32px;font-weight:bold;">
+    --
+  </div>
+</div>
+    <div class="card">
   <h2>Thermen Score</h2>
 
   <div id="score"
@@ -312,6 +320,27 @@ Object.keys(hourMap).forEach(hour => {
 
 document.getElementById('timeStats').innerHTML =
   html;
+  let trendText = '➡️ Stabil';
+
+if (saunaData.length >= 2) {
+
+  const latestSauna =
+    Number(saunaData[saunaData.length - 1]);
+
+  const previousSauna =
+    Number(saunaData[saunaData.length - 2]);
+
+  if (latestSauna > previousSauna) {
+    trendText = '📈 Wird voller';
+  }
+
+  if (latestSauna < previousSauna) {
+    trendText = '📉 Wird leerer';
+  }
+}
+
+document.getElementById('trend').innerText =
+  trendText;
   const saunaNumbers = saunaData.map(Number);
 
 const avgSauna =
