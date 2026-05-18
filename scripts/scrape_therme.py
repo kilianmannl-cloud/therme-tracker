@@ -2,9 +2,9 @@ import csv
 import re
 import requests
 import os
+import holidays
 
 from datetime import datetime
-import holidays
 
 now = datetime.now()
 
@@ -38,6 +38,14 @@ weather_data = requests.get(weather_url).json()
 temp = weather_data["current"]["temperature_2m"]
 weather_code = weather_data["current"]["weather_code"]
 
+# Feiertage
+de_holidays = holidays.DE(subdiv='BY')
+
+holiday = now.date() in de_holidays
+
+weekend = now.weekday() >= 5
+
+# Fußball
 api_key = os.getenv("FOOTBALL_API_KEY")
 
 headers = {
@@ -53,8 +61,8 @@ football_data = requests.get(
     headers=headers
 ).json()
 
-
-
+bayern_match = False
+germany_match = False
 
 for match in football_data.get("matches", []):
 
@@ -68,13 +76,6 @@ for match in football_data.get("matches", []):
 
     if "Germany" in teams:
         germany_match = True
-de_holidays = holidays.DE(subdiv='BY')
-
-holiday = now.date() in de_holidays
-
-weekend = now.weekday() >= 5
-bayern_match = False
-germany_match = False
 
 row = [
     now.isoformat(),
@@ -83,18 +84,19 @@ row = [
     temp,
     weather_code,
     holiday,
+    weekend,
     bayern_match,
     germany_match
 ]
 
+# data/history.csv
 with open("data/history.csv", "a", newline="") as f:
     writer = csv.writer(f)
     writer.writerow(row)
-    
+
+# docs/history.csv
 with open("docs/history.csv", "a", newline="") as f:
     writer = csv.writer(f)
     writer.writerow(row)
-print("Bad:", bad)
-print("Sauna:", sauna)
-print("Temperatur:", temp)
+
 print("Daten gespeichert")
