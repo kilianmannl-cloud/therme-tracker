@@ -92,6 +92,14 @@
     --
   </div>
 </div>
+   <div class="card">
+  <h2>Thermen Score</h2>
+
+  <div id="score"
+       style="font-size:48px;font-weight:bold;">
+    --
+  </div>
+</div> 
     <div class="card">
   <h2>Status</h2>
 
@@ -174,6 +182,36 @@ if (germanyMatch) {
 
 document.getElementById('football').innerText =
   footballText;
+  let score = 10;
+
+const saunaLevel = parseInt(latest[2]);
+
+if (saunaLevel > 40) {
+  score -= 2;
+}
+
+if (saunaLevel > 75) {
+  score -= 4;
+}
+
+if (holiday) {
+  score -= 2;
+}
+
+if (weekend) {
+  score -= 1;
+}
+
+if (bayernMatch || germanyMatch) {
+  score += 1;
+}
+
+if (score < 1) {
+  score = 1;
+}
+
+document.getElementById('score').innerText =
+  score + '/10';
   const sauna = parseInt(latest[2]);
 
 let status = '🟢 Ruhig';
