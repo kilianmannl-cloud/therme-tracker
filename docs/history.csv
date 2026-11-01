@@ -1805,3 +1805,4 @@ timestamp,bad,sauna,temp,weather,holiday,weekend,bayern_match,germany_match
 2026-10-31T14:49:53.423889,30,54,9.0,3,False,True,True,False
 2026-10-31T18:52:28.073720,36,65,6.1,61,False,True,True,False
 2026-10-31T22:04:07.929018,0,0,5.5,3,False,True,True,False
+2026-11-01T01:02:45.771480,0,0,5.5,61,True,True,False,False
